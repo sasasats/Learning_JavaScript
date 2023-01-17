@@ -8,6 +8,9 @@ import { expect } from 'chai';
 
 describe('Rest API task', () => {
   const USER_NUMBER_5 = 5;
+  const RANDOM_STRING_LENGTH = 10;
+  const EXISTING_POST_ID = 99;
+  const NOT_EXISTING_POST_ID = 150;
 
   it('Get all posts', async () => {
     const posts = await Posts.getPosts();
@@ -15,18 +18,18 @@ describe('Rest API task', () => {
   })
 
   it('Get post 99', async () => {
-    const post = await Post.getPost(99);
+    const post = await Post.getPost(EXISTING_POST_ID);
   })
 
   it('Get post 150', async () => {
-    const post = await Post.getNoSuchPost(150);
+    const post = await Post.getNoSuchPost(NOT_EXISTING_POST_ID);
   })
 
   it('Create post', async () => {
     const post = await Post.createPost({
       'userId': 1,
-      'title': RandomUtils.getRandomAlphaNumericString(10),
-      'body': RandomUtils.getRandomAlphaNumericString(10)
+      'title': RandomUtils.getRandomAlphaNumericString(RANDOM_STRING_LENGTH),
+      'body': RandomUtils.getRandomAlphaNumericString(RANDOM_STRING_LENGTH)
     });
   })
 
