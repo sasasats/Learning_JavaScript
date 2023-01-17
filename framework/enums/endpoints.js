@@ -1,7 +1,5 @@
-class Endpoint {
-  URL = 'https://jsonplaceholder.typicode.com/'
-  POSTS = 'posts/';
-  USERS = 'users/';
+export default class Endpoint {
+  static URL = 'https://jsonplaceholder.typicode.com/'
+  static POSTS = 'posts/';
+  static USERS = 'users/';
 }
-
-export default new Endpoint();

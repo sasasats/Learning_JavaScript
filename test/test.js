@@ -7,6 +7,8 @@ import user5 from '../framework/templates/user5.json' assert { type: "json" };
 import { expect } from 'chai';
 
 describe('Rest API task', () => {
+  const USER_NUMBER_5 = 5;
+
   it('Get all posts', async () => {
     const posts = await Posts.getPosts();
     expect(posts.isPostsSorted()).to.be.true;
@@ -21,23 +23,22 @@ describe('Rest API task', () => {
   })
 
   it('Create post', async () => {
-    const data = {
+    const post = await Post.createPost({
       'userId': 1,
       'title': RandomUtils.getRandomAlphaNumericString(10),
       'body': RandomUtils.getRandomAlphaNumericString(10)
-    };
-    const post = await Post.createPost(data);
+    });
   })
 
   it('Get all users', async () => {
     const templateUser = new User(user5);
-    const user = await (await Users.getUsers()).getUser(5);
+    const user = await (await Users.getUsers()).getUser(USER_NUMBER_5);
     expect(JSON.stringify(templateUser)).equals(JSON.stringify(user));
   })
 
   it('Get user 5', async () => {
     const templateUser = new User(user5);
-    const user = await User.getUser(5);
+    const user = await User.getUser(USER_NUMBER_5);
     expect(JSON.stringify(templateUser)).equals(JSON.stringify(user));
   })
 })
