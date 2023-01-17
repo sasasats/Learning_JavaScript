@@ -27,9 +27,12 @@ export default class CardPage extends Page {
     return $("//div[contains(@class,'timer')]");
   }
 
-  async isPageOpened(pageNumber) {
-    return (await this.pageIndicator.getText()) ===
-      `${pageNumber.toString()} / 4`;
+  async getCardIndicatorByNumber(cardNumber) {
+    return $(`//div[@class='page-indicator' and text()='${cardNumber} / 4']`);
+  }
+
+  async isOpened(cardNumber) {
+    return super.isOpened(await this.getCardIndicatorByNumber(cardNumber));
   }
 
   async isHelpFormHidden() {
@@ -50,9 +53,5 @@ export default class CardPage extends Page {
 
   async getTimerValue() {
     return this.timer.getText();
-  }
-
-  async open() {
-    return super.open('game.html');
   }
 }

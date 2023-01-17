@@ -9,15 +9,10 @@ export default class HomePage extends Page {
     return $("//a[@class='start__link']");
   }
 
-  async isHomePageOpened() {
-    return this.page.isDisplayed();
+  async isOpened() {
+    return super.isOpened(this.page);
   }
-
   async clickLinkToCardsPage() {
     await this.linkToCardsPage.click();
-  }
-
-  async open() {
-    return super.open('');
   }
 }

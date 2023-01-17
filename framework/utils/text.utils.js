@@ -1,11 +1,11 @@
-class TextUtils {
-  ENGILSH_ALPHABET =
+export default class TextUtils {
+  static ENGILSH_ALPHABET =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  CYRILLIC_ALPHABET =
+  static CYRILLIC_ALPHABET =
     "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-  NUMBERS = "1234567890";
+  static NUMBERS = "1234567890";
 
-  generateRandomString(symbolCollection, length) {
+  static generateRandomString(symbolCollection, length) {
     let string = "";
     for (let i = 0; i < length; i++) {
       string += symbolCollection[Math.floor(
@@ -14,5 +14,3 @@ class TextUtils {
     return string;
   }
 }
-
-export default new TextUtils();

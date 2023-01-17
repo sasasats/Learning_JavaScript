@@ -1,9 +1,9 @@
-class RandomUtils {
-  async getRandomElement(array) {
+export default class RandomUtils {
+  static async getRandomElement(array) {
     return array[Math.floor(Math.random() * await array.length)];
   }
 
-  async getRandomElements(array, quantity) {
+  static async getRandomElements(array, quantity) {
     let resultArray = [];
     for (let i = 0; i < quantity; i++) {
       let randomIndex = Math.floor(Math.random() * await array.length);
@@ -13,5 +13,3 @@ class RandomUtils {
     return resultArray;
   }
 }
-
-export default new RandomUtils();

@@ -23,7 +23,6 @@ export const config = {
     // will be called from there.
     //
     specs: [
-        // './test/specs/**/example.e2e.js'
         './project/specs/**/userinterface.js'
     ],
     // Patterns to exclude.

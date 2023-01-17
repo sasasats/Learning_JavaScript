@@ -1,5 +1,5 @@
 export default class Page {
-  async open(path) {
-    return browser.navigateTo(`https://userinyerface.com/${path}`);
+  async isOpened(element) {
+    return element.isDisplayed();
   }
 }
