@@ -1,0 +1,22 @@
+{
+  "name": "my-new-project",
+  "type": "module",
+  "devDependencies": {
+    "@wdio/cli": "^8.1.3",
+    "@wdio/local-runner": "^8.1.3",
+    "@wdio/mocha-framework": "^8.1.2",
+    "@wdio/spec-reporter": "^8.1.2",
+    "chai": "*",
+    "chromedriver": "^109.0.0",
+    "mocha": "*",
+    "wdio-chromedriver-service": "^8.0.1"
+  },
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.0",
+    "winston": "^3.8.2"
+  }
+}
