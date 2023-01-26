@@ -10,7 +10,6 @@ export default class MainPage extends Page {
   }
 
   async isOpened() {
-    await this.myPage.waitForClickable({ timeout: 100000 });
     return super.isOpened(this.myPage);
   }
 }

@@ -4,5 +4,6 @@ export const apiEndpoints = {
   wallDelete: 'wall.delete',
   wallCreateComment: 'wall.createComment',
   uploadLink: 'photos.getWallUploadServer',
+  photosSaveWallPhoto: 'photos.saveWallPhoto',
   likesIsLiked: 'likes.isLiked',
 }

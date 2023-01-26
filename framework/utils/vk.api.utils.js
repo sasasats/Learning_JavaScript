@@ -1,83 +1,104 @@
-import { userData } from '../data/user.data.js';
-import { apiData } from '../data/api.data.js';
-import { apiEndpoints } from '../data/api.endpoints.js';
-import { apiParameters } from '../data/api.parameters.js';
-import fs from 'fs'
-import path from "path";
+import fs from 'fs';
+import fetch from 'node-fetch';
 import FormData from "form-data";
 
+import { apiData } from '../data/api.data.js';
+import { userData } from '../data/user.data.js';
+import { apiEndpoints } from '../data/api.endpoints.js';
+import { apiParameters } from '../data/api.parameters.js';
+
 export default class VkApiUtils {
+  static DEFAULT_PARAMETERS = {
+    [apiParameters.access_token]: apiData.token,
+    [apiParameters.v]: apiData.version
+  }
+
   static async createPost(textMessage) {
     const response = await fetch(apiData.request(apiEndpoints.wallPost), {
-      method: 'post',
-      body: new URLSearchParams({
+      method: apiParameters.post,
+      body: new URLSearchParams(Object.assign({
         [apiParameters.owner_id]: userData.id,
         [apiParameters.message]: textMessage,
-        [apiParameters.access_token]: apiData.token,
-        [apiParameters.v]: apiData.version
-      }),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }, this.DEFAULT_PARAMETERS)),
+      headers: {
+        [apiParameters.content_type]: apiParameters.application_urlencoded
+      }
     });
     return await (await response.json()).response.post_id;
   }
 
-  static async changePostText(postId, textMessage) {
+  static async changePost(postId, textMessage, uploadedPhoto) {
     const response = await fetch(apiData.request(apiEndpoints.wallEdit), {
-      method: 'post',
-      body: new URLSearchParams({
+      method: apiParameters.post,
+      body: new URLSearchParams(Object.assign({
         [apiParameters.owner_id]: userData.id,
         [apiParameters.post_id]: postId,
         [apiParameters.message]: textMessage,
-        [apiParameters.access_token]: apiData.token,
-        [apiParameters.v]: apiData.version
-      }),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        [apiParameters.attachments]:
+          `${apiParameters.photo}${uploadedPhoto.owner_id}_${uploadedPhoto.id}`,
+      }, this.DEFAULT_PARAMETERS)),
+      headers: {
+        [apiParameters.content_type]: apiParameters.application_urlencoded
+      }
     });
     return await (await response.json()).response.post_id;
   }
 
   static async getUploadLink() {
     const response = await fetch(apiData.request(apiEndpoints.uploadLink), {
-      method: 'post',
-      body: new URLSearchParams({
+      method: apiParameters.post,
+      body: new URLSearchParams(Object.assign({
         [apiParameters.user_id]: userData.id,
-        [apiParameters.access_token]: apiData.token,
-        [apiParameters.v]: apiData.version
-      }),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }, this.DEFAULT_PARAMETERS)),
+      headers: {
+        [apiParameters.content_type]: apiParameters.application_urlencoded
+      }
     });
     return await (await response.json()).response.upload_url;
   }
 
-  static async uploadPhoto() {
-    const filePath = '../resources/ochoba359.jpg';
-    let reader = fs.createReadStream(path.resolve(filePath));
-    let formData = new FormData();
-    formData.append('photo', reader);
-
-    console.log(`\n\n${await this.getUploadLink()}\n\n`);
+  static async uploadPhoto(filePath) {
+    const reader = fs.createReadStream(filePath);
+    const formData = new FormData();
+    formData.append(apiParameters.photo, reader);
 
     const response = await fetch(await this.getUploadLink(), {
-      method: 'post',
+      method: apiParameters.post,
       body: formData,
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: formData.getHeaders(),
     });
     return response.json();
   }
 
+  static async saveWallPhoto(uploadedPhoto) {
+    const response = await fetch(
+      apiData.request(apiEndpoints.photosSaveWallPhoto), {
+      method: apiParameters.post,
+      body: new URLSearchParams(Object.assign({
+        [apiParameters.user_id]: userData.id,
+        [apiParameters.photo]: uploadedPhoto.photo,
+        [apiParameters.server]: uploadedPhoto.server,
+        [apiParameters.hash]: uploadedPhoto.hash,
+      }, this.DEFAULT_PARAMETERS)),
+      headers: {
+        [apiParameters.content_type]: apiParameters.application_urlencoded
+      }
+    });
+    return (await response.json()).response[0];
+  }
 
   static async createComment(postId, textMessage) {
     const response = await fetch(
       apiData.request(apiEndpoints.wallCreateComment), {
-      method: 'post',
-      body: new URLSearchParams({
+      method: apiParameters.post,
+      body: new URLSearchParams(Object.assign({
         [apiParameters.owner_id]: userData.id,
         [apiParameters.post_id]: postId,
         [apiParameters.message]: textMessage,
-        [apiParameters.access_token]: apiData.token,
-        [apiParameters.v]: apiData.version
-      }),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }, this.DEFAULT_PARAMETERS)),
+      headers: {
+        [apiParameters.content_type]: apiParameters.application_urlencoded
+      }
     });
     return await (await response.json()).response.comment_id;
   }
@@ -85,16 +106,16 @@ export default class VkApiUtils {
   static async isPostLiked(postId) {
     const response = await fetch(
       apiData.request(apiEndpoints.likesIsLiked), {
-      method: 'post',
-      body: new URLSearchParams({
+      method: apiParameters.post,
+      body: new URLSearchParams(Object.assign({
         [apiParameters.user_id]: userData.id,
         [apiParameters.type]: apiParameters.post,
         [apiParameters.owner_id]: userData.id,
         [apiParameters.item_id]: postId,
-        [apiParameters.access_token]: apiData.token,
-        [apiParameters.v]: apiData.version
-      }),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }, this.DEFAULT_PARAMETERS)),
+      headers: {
+        [apiParameters.content_type]: apiParameters.application_urlencoded
+      }
     });
     return await (await response.json()).response.liked;
   }
@@ -102,15 +123,15 @@ export default class VkApiUtils {
   static async deletePost(postId) {
     const response = await fetch(
       apiData.request(apiEndpoints.wallDelete), {
-      method: 'post',
-      body: new URLSearchParams({
+      method: apiParameters.post,
+      body: new URLSearchParams(Object.assign({
         [apiParameters.owner_id]: userData.id,
         [apiParameters.post_id]: postId,
-        [apiParameters.access_token]: apiData.token,
-        [apiParameters.v]: apiData.version
-      }),
-      headers: { 'Content-Type': 'Multipart/form-data' }
+      }, this.DEFAULT_PARAMETERS)),
+      headers: {
+        [apiParameters.content_type]: apiParameters.application_urlencoded
+      }
     });
-    return await (await response.json());
+    return response.json();
   }
 }

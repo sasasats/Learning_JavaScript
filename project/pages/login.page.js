@@ -1,5 +1,5 @@
-import WaitUtils from "../../framework/utils/wait.utils.js";
 import Page from "./page.js";
+import WaitUtils from "../../framework/utils/wait.utils.js";
 
 export default class LoginPage extends Page {
 

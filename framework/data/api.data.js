@@ -1,4 +1,5 @@
 export const apiData = {
+  linkToResource: (fileName) => `./framework/resources/${fileName}`,
   request: (endpoint) => `https://api.vk.com/method/${endpoint}`,
   token: `vk1.a.lS0EEtvBzdOdITBle8qUllqahvwZmgVBuZeXsp8AA7j-N6rrCeCcZRxOTyC5HmT
   GpUXszmDZfPX_h4Owr7NALfTibYacWTPlZQDzd-fNYXhlsKDAiiZHNjUi4QutvZP_OjIBtatxWsWU

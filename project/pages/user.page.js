@@ -1,6 +1,7 @@
-import { userData } from "../../framework/data/user.data.js";
 import Page from "./page.js";
 import WaitUtils from "../../framework/utils/wait.utils.js";
+
+import { userData } from "../../framework/data/user.data.js";
 import { parameterizedLocators } from "../../framework/data/parametrized.locators.js";
 
 export default class UserPage extends Page {
@@ -18,8 +19,10 @@ export default class UserPage extends Page {
   }
 
   async isWallPostDisplayed(postId, isReverse = false) {
-    await (await this.getWallPost(postId)).waitForDisplayed({ reverse: isReverse });
-    return (await this.getWallPost(postId)).isDisplayed();
+    return WaitUtils.waitUntilDisplayed(
+      await this.getWallPost(postId),
+      isReverse
+    );
   }
 
   async getWallPostText(postId) {
@@ -27,13 +30,20 @@ export default class UserPage extends Page {
       "//div[contains(@class,'wall_post_text')]")).getText();
   }
 
+  async isWallPostPhotoDisplayed(postId, photo) {
+    return $(parameterizedLocators.post(userData.id, postId,
+      `//a[@href='/photo${userData.id}_${photo.id}']`)).isDisplayed();
+  }
+
   async getComment(commentId) {
     return $(parameterizedLocators.comment(userData.id, commentId));
   }
 
-  async isCommentDisplayed(commentId) {
-    await (await this.getComment(commentId)).waitForClickable({ timeout: 10000 });
-    return (await this.getComment(commentId)).isDisplayed();
+  async isCommentDisplayed(commentId, isReverse = false) {
+    return WaitUtils.waitUntilDisplayed(
+      await this.getComment(commentId),
+      isReverse
+    );
   }
 
   async getCommentText(commentId) {
@@ -51,7 +61,6 @@ export default class UserPage extends Page {
   }
 
   async isOpened() {
-    await this.profileHeader.waitForClickable({ timeout: 10000 });
     return super.isOpened(this.profileHeader);
   }
 }

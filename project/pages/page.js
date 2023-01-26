@@ -1,5 +1,7 @@
+import WaitUtils from "../../framework/utils/wait.utils.js";
+
 export default class Page {
   async isOpened(element) {
-    return element.isDisplayed();
+    return WaitUtils.waitUntilDisplayed(element);
   }
 }

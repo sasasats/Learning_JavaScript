@@ -5,7 +5,13 @@ export const apiParameters = {
   message: 'message',
   type: 'type',
   post: 'post',
+  photo: 'photo',
+  server: 'server',
+  hash: 'hash',
   item_id: 'item_id',
   access_token: 'access_token',
+  attachments: 'attachments',
   v: 'v',
+  content_type: 'Content-Type',
+  application_urlencoded: 'application/x-www-form-urlencoded',
 }

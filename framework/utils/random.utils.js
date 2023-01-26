@@ -1,16 +1,16 @@
 export default class RandomUtils {
-  static CHARACTERS = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-  0123456789`;
+  static CHARACTERS =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
   static getRandomString(length) {
-    let result = '';
-    const charactersLength = this.CHARACTERS.length - 1;
+    const charactersLength = this.CHARACTERS.length;
+    let randomString = '';
 
     for (let i = 0; i < length; i++) {
-      result += this.CHARACTERS.charAt(Math.floor(
-        Math.random() * charactersLength));
+      let index = Math.floor(Math.random() * charactersLength);
+      let a = this.CHARACTERS.charAt(index);
+      randomString += a;
     }
-
-    return result;
+    return randomString;
   }
 }
