@@ -1,0 +1,14 @@
+{
+  "ownerId": "owner_id",
+  "userId": "user_id",
+  "postId": "post_id",
+  "message": "message",
+  "type": "type",
+  "itemId": "item_id",
+  "photo": "photo",
+  "server": "server",
+  "hash": "hash",
+  "attachments": "attachments",
+  "accessToken": "access_token",
+  "version": "v"
+}
