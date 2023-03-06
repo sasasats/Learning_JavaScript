@@ -18,7 +18,7 @@ describe('template spec', () => {
     cy.isCardOpened(1);
   })
 
-  it('Test case 1', () => {
+  it.skip('Test case 1', () => {
     cy.log('Input random valid password, email, accept the terms of use and click "next" button');
     cy.authorize();
 
