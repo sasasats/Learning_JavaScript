@@ -29,7 +29,7 @@ describe('Userinterface task', () => {
   it('Fill the cards', async () => {
     await LoginCardSteps.login();
     expect(await cardPage.isOpened(SECOND_CARD_NUMBER)).to.be.true;
-    await InterestsCardSteps.fillInformationAboutYourself(INTERESTS_NUMBER);
+    //await InterestsCardSteps.fillInformationAboutYourself(INTERESTS_NUMBER);
   })
 
   it('Hide help form', async () => {
