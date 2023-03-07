@@ -1,0 +1,158 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 1,
+    "failures": -1,
+    "start": "2023-03-07T10:26:02.970Z",
+    "end": "2023-03-07T10:26:08.723Z",
+    "duration": 5753,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 25,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "78ad5cab-bfd2-4b3c-a899-9d504e26928f",
+      "title": "",
+      "fullFile": "cypress\\e2e\\userinterface.cy.js",
+      "file": "cypress\\e2e\\userinterface.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a1cf4029-ac78-4d33-9c62-275085d2d480",
+          "title": "template spec",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test case 1",
+              "fullTitle": "template spec Test case 1",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "cy.log('Input random valid password, email, accept the terms of use and click \"next\" button');\ncy.authorize();\ncy.log('The \"2\" card should be open');\ncy.isCardOpened(2);\ncy.log('Choose 3 random interests, upload image, click \"Next\" button');\ncy.fillProfile(INTERESTS_QUANTITY);\ncy.log('The \"3\" card should be open');\ncy.isCardOpened(3);",
+              "err": {},
+              "uuid": "51f54b46-a2fa-49c8-9a54-314b3b72fa93",
+              "parentUUID": "a1cf4029-ac78-4d33-9c62-275085d2d480",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Test case 2",
+              "fullTitle": "template spec Test case 2",
+              "timedOut": null,
+              "duration": 2440,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.log('Hide help form');\ncy.hideHelpForm();\ncy.log('Help form should be hidden');\ncy.isHelpFormHidden();",
+              "err": {},
+              "uuid": "033a0f48-b67e-4a15-a92c-e80843c3c355",
+              "parentUUID": "a1cf4029-ac78-4d33-9c62-275085d2d480",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Test case 3",
+              "fullTitle": "template spec Test case 3",
+              "timedOut": null,
+              "duration": 2687,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.log('Accept cookies');\ncy.acceptCookies();\ncy.log('Cookies form should be closed');\ncy.isCookiesBannerClosed();",
+              "err": {},
+              "uuid": "987ac60d-055c-40d8-9c12-b845ba4ee7cf",
+              "parentUUID": "a1cf4029-ac78-4d33-9c62-275085d2d480",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Test case 4",
+              "fullTitle": "template spec Test case 4",
+              "timedOut": null,
+              "duration": 571,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.log('Validate that timer starts from \"00:00:00\"');\ncy.isTimerStartsWith(START_TIME);",
+              "err": {},
+              "uuid": "c1a4bb2a-4ce6-4287-9a36-385b3e11c062",
+              "parentUUID": "a1cf4029-ac78-4d33-9c62-275085d2d480",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "033a0f48-b67e-4a15-a92c-e80843c3c355",
+            "987ac60d-055c-40d8-9c12-b845ba4ee7cf",
+            "c1a4bb2a-4ce6-4287-9a36-385b3e11c062"
+          ],
+          "failures": [],
+          "pending": [
+            "51f54b46-a2fa-49c8-9a54-314b3b72fa93"
+          ],
+          "skipped": [],
+          "duration": 5698,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
